@@ -1,0 +1,38 @@
+{
+  "name": "@toolbuilder/list",
+  "version": "0.1.0",
+  "description": "Tiny, mutable, double linked, iterable list",
+  "main": "index.js",
+  "scripts": {
+    "test": "tape -r esm test/*_test.js | tap-nirvana"
+  },
+  "files": [
+    "src",
+    "index.js",
+    "umd"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/toolbuilder/list.git"
+  },
+  "keywords": [
+    "double",
+    "linked",
+    "list",
+    "chainable"
+  ],
+  "author": "Kevin Hudson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/toolbuilder/list/issues"
+  },
+  "homepage": "https://github.com/toolbuilder/list#readme",
+  "dependencies": {
+    "esm": "^3.2.25",
+    "iterablefu": "^0.3.1"
+  },
+  "devDependencies": {
+    "tap-nirvana": "^1.1.0",
+    "tape": "^4.11.0"
+  }
+}
