@@ -139,6 +139,10 @@ test('Symbol.iterator', subtest => {
 })
 
 test('nodes', subtest => {
+  for (const node of List.from().nodes()) {
+    subtest.fail(`empty list should not be iterated: ${node}`)
+  }
+
   const expected = ['A', 'B', 'C']
   const list = List.from(expected)
   const actual = []
@@ -150,6 +154,10 @@ test('nodes', subtest => {
 })
 
 test('nodesReversed', subtest => {
+  for (const node of List.from().nodesReversed()) {
+    subtest.fail(`empty list should not be iterated: ${node}`)
+  }
+
   const list = List.from(['C', 'B', 'A'])
   const actual = []
   for (const node of list.nodesReversed()) {

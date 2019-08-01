@@ -219,7 +219,7 @@ class List {
    * console.log(array) // prints [1, 2, 3, 4]
    */
   * nodes () {
-    let current = (this.head === this.tail) ? this.tail : this.head.next
+    let current = this.head.next
     while (current !== this.tail) {
       yield current
       current = current.next
@@ -232,7 +232,7 @@ class List {
    * @returns {Generator}
    */
   * nodesReversed () {
-    let current = (this.head === this.tail) ? this.head : this.tail.prev
+    let current = this.tail.prev
     while (current !== this.head) {
       yield current
       current = current.prev
@@ -253,7 +253,7 @@ class List {
    * console.log(array) // prints [1, 2, 3, 4]
    */
   * [Symbol.iterator] () {
-    let current = (this.head === this.tail) ? this.tail : this.head.next
+    let current = this.head.next
     while (current !== this.tail) {
       yield current.value
       current = current.next
