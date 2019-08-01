@@ -148,3 +148,13 @@ test('nodes', subtest => {
   subtest.deepEqual(actual, expected, 'nodes provided all nodes of list in order')
   subtest.end()
 })
+
+test('nodesReversed', subtest => {
+  const list = List.from(['C', 'B', 'A'])
+  const actual = []
+  for (const node of list.nodesReversed()) {
+    actual.push(node.value)
+  }
+  subtest.deepEqual(actual, ['A', 'B', 'C'], 'nodesReversed provided all nodes of list in reverse order')
+  subtest.end()
+})

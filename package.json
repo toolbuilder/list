@@ -3,8 +3,10 @@
   "version": "0.1.0",
   "description": "Tiny, mutable, double linked, iterable list",
   "main": "index.js",
+  "module": "src/list.js",
   "scripts": {
-    "test": "tape -r esm test/*_test.js | tap-nirvana"
+    "test": "tape -r esm test/*_test.js | tap-nirvana",
+    "docs": "node -r esm ./scripts/docgen.js"
   },
   "files": [
     "src",
@@ -28,10 +30,11 @@
   },
   "homepage": "https://github.com/toolbuilder/list#readme",
   "dependencies": {
-    "esm": "^3.2.25",
-    "iterablefu": "^0.3.1"
+    "esm": "^3.2.25"
   },
   "devDependencies": {
+    "documentation": "^12.0.3",
+    "markedpp": "^1.0.1",
     "tap-nirvana": "^1.1.0",
     "tape": "^4.11.0"
   }

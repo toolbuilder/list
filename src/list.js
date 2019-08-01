@@ -1,10 +1,11 @@
-// Mutable double linked list
+// Minimalist, mutable, double linked list.
 
+// Simple node class for use by List.
 class Node {
   constructor (prev, next, value) {
     this.prev = prev
     this.next = next
-    this.value = value
+    this.value = value // only this property is part of the public API
   }
 
   release () {
@@ -14,14 +15,14 @@ class Node {
   }
 }
 
-/**
- * Doubly linked list.
- */
 class List {
   /**
    * Constructor.
    *
-   * @param {Iterable} iterable - build list from iterable, may be null
+   * @param {Iterable} iterable - builds list using iterable
+   * @example
+   * const list = new List([1, 2, 3])
+   * console.log([...list]) // prints [1, 2, 3]
    */
   constructor (iterable = null) {
     // two dummy nodes at each end of list to eliminate conditional checks on next/prev references
@@ -40,6 +41,10 @@ class List {
    * Static constructor.
    *
    * @param {Iterable} iterable - build list from iterable, may be null
+   * @returns {List}
+   * @example
+   * const list = List.from(['A', 'B'])
+   * console.log([...list]) // prints ['A', 'B']
    */
   static from (iterable = null) {
     return new List(iterable)
@@ -49,20 +54,36 @@ class List {
    * Static constructor from parameter values.
    *
    * @param  {...any} values - each value becomes an element of the list in the order provided
+   * @returns {List}
+   * @example
+   * const list = List.of(1, 2, 'B')
+   * console.log([...list]) // prints [1, 2, 'B']
    */
   static of (...values) {
     return new List(values)
   }
 
   /**
-   * Provide the first element in the list. Returns undefined if list is empty.
+   * Provide the first node in the list. Returns undefined if list is empty.
+   *
+   * @returns {Node} - first node in list
+   * @example
+   * const list = List.from(['a', 'b', 'c'])
+   * const node = list.first()
+   * console.log(node.value) // prints 'a'
    */
   first () {
     return (this.length === 0) ? undefined : this.head.next
   }
 
   /**
-   * Provide the last element in the list. Returns undefined if list is empty.
+   * Provide the last node in the list. Returns undefined if list is empty.
+   *
+   * @returns {Node} - last node in list
+   * @example
+   * const list = List.from(['A', 'B', 'C'])
+   * const node = list.last()
+   * console.log(node.value) // prints 'C'
    */
   last () {
     return (this.length === 0) ? undefined : this.tail.prev
@@ -74,6 +95,11 @@ class List {
    * @param {Node} prevNode - node from this list to insert value behind
    * @param {any} value - value to insert
    * @returns {Node} - the newly created node
+   * @example
+   * const list = new List(['A', 'B', 'D'])
+   * const prevNode = list.find(value => value === 'B')
+   * list.insertAfter(prevNode, 'C')
+   * console.log([...list]) // prints ['A', 'B', 'C', 'D']
    */
   insertAfter (prevNode, value) {
     const nextNode = prevNode.next
@@ -90,6 +116,11 @@ class List {
    * @param {Node} nextNode - node from this list to insert value in front of
    * @param {any} value - value to insert
    * @returns {Node} - the newly created node
+   * @example
+   * const list = new List(['A', 'C', 'D'])
+   * const nextNode = list.find(value => value === 'C')
+   * list.insertBefore(nextNode, 'B')
+   * console.log([...list]) // prints ['A', 'B', 'C', 'D']
    */
   insertBefore (nextNode, value) {
     const prevNode = nextNode.prev
@@ -105,6 +136,12 @@ class List {
    *
    * @param {Node} node - the node to remove from the list. The node is no longer useable after this call,
    * and no longer references the associated value.
+   * @example
+   * const list = new List(['A', 'B', 'C', 'D'])
+   * const node = list.find(value => value === 'C')
+   * list.remove(node)
+   * // at this point the variable 'node' is no longer useable, node.value will return null.
+   * console.log([...list]) // prints ['A', 'B', 'D']
    */
   remove (node) {
     const prevNode = node.prev
@@ -120,6 +157,11 @@ class List {
    *
    * @param {any} value - to be added to end of list
    * @returns - the newly created Node
+   * @example
+   * const list = new List(['A', 'B', 'C'])
+   * const node = list.push('D')
+   * console.log([...list]) // prints ['A', 'B', 'C', 'D']
+   * console.log(node.value) // prints 'D'
    */
   push (value) {
     return this.insertBefore(this.tail, value)
@@ -127,7 +169,13 @@ class List {
 
   /**
    * Remove the last value in the list.
+   *
    * @returns - the value of the removed node, or undefined if the list was empty
+   * @example
+   * const list = new List(['A', 'B', 'C'])
+   * const value = list.pop()
+   * console.log([...list]) // prints ['A', 'B']
+   * console.log(value) // prints 'C'
    */
   pop () {
     if (this.length > 0) {
@@ -142,8 +190,12 @@ class List {
    * Find the first value in the list where callback(value) returns truthy.
    *
    * @param {Function} callback called for each value in the list until returns truthy
-   * @param {Object} thisArg value to use as this when executing callback, defaults to null
+   * @param {Object} thisArg value to use as `this` when executing callback, defaults to null
    * @returns {Node} the node that contains the value. The value property will provide the value.
+   * @example
+   * const list = new List(['A', 'B', 'C', 'D'])
+   * const node = list.find(value => value === 'C')
+   * console.log(node.value) // prints 'C'
    */
   find (callback, thisArg = null) {
     for (const node of this.nodes()) {
@@ -154,8 +206,17 @@ class List {
   }
 
   /**
-   * Generator that produces each node list in order. The value property of each node provides
+   * Generator that produces each node list in order from first to last. The value property of each node provides
    * the associated value.
+   *
+   * @returns {Generator}
+   * @example
+   * const list = List.from([1, 2, 3, 4])
+   * const array = []
+   * for (const node of list.nodes()) {
+   *   array.push(node.value)
+   * }
+   * console.log(array) // prints [1, 2, 3, 4]
    */
   * nodes () {
     let current = (this.head === this.tail) ? this.tail : this.head.next
@@ -166,7 +227,30 @@ class List {
   }
 
   /**
+   * Generator that produces each node in order from last to first.
+   *
+   * @returns {Generator}
+   */
+  * nodesReversed () {
+    let current = (this.head === this.tail) ? this.head : this.tail.prev
+    while (current !== this.head) {
+      yield current
+      current = current.prev
+    }
+  }
+
+  /**
    * Iterable protocol over the *values* in the list.
+   *
+   * @name Symbol.iterator
+   * @returns {Generator}
+   * @example
+   * const list = List.from([1, 2, 3, 4])
+   * const array = []
+   * for (const value of list) {
+   *   array.push(value)
+   * }
+   * console.log(array) // prints [1, 2, 3, 4]
    */
   * [Symbol.iterator] () {
     let current = (this.head === this.tail) ? this.tail : this.head.next
