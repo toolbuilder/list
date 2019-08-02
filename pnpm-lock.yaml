@@ -4,6 +4,7 @@ devDependencies:
   documentation: 12.0.3
   markedpp: 1.0.1
   npm-run-all: 4.1.5
+  rimraf: 2.6.3
   rollup: 1.18.0
   rollup-plugin-terser: 5.1.1_rollup@1.18.0
   tap-nirvana: 1.1.0
@@ -3671,6 +3672,13 @@ packages:
       node: '>=0.12'
     resolution:
       integrity: sha512-TTlYpa+OL+vMMNG24xSlQGEJ3B/RzEfUlLct7b5G/ytav+wPrplCpVMFuwzXbkecJrb6IYo1iFb0S9v37754mg==
+  /rimraf/2.6.3:
+    dependencies:
+      glob: 7.1.4
+    dev: true
+    hasBin: true
+    resolution:
+      integrity: sha512-mwqeW5XsA2qAejG46gYdENaxXjx9onRNCfn7L0duuP4hCuTIi/QO7PDK07KJfp1d+izWPrzEJDcSqBa0OZQriA==
   /rollup-plugin-terser/5.1.1_rollup@1.18.0:
     dependencies:
       '@babel/code-frame': 7.5.5
@@ -4603,6 +4611,7 @@ specifiers:
   esm: ^3.2.25
   markedpp: ^1.0.1
   npm-run-all: ^4.1.5
+  rimraf: ^2.6.3
   rollup: ^1.18.0
   rollup-plugin-terser: ^5.1.1
   tap-nirvana: ^1.1.0

@@ -38,16 +38,38 @@ Minimalist, mutable, double linked, iterable list.
 npm install --save @toolbuilder/list
 ```
 
+Access the latest UMD package from [unpkg](https://unpkg.com) like this:
+
+```html
+<script src="https://unpkg.com/@toolbuilder%2flist/umd/list.umd.min.js"></script>
+```
+
+Or for the full version:
+
+```html
+<script src="https://unpkg.com/@toolbuilder%2flist/umd/list.umd.js"></script>
+```
+
+Both packages create a global variable representing the list as `DoubleLinkedList`.
+
 ## Getting Started
 
+To access as the Node version, use this import:
+
 ```javascript
-import { List } from '@toolbuilder/list'
+let { List } = require('@toolbuilder/list')
 
 const list = new List()
 list.push('A')
 const node = list.first()
 list.insertAfter(node, 'B')
 console.log(list.last().value) // prints 'B'
+```
+
+To access the pure list with no [esm](https://www.npmjs.com/package/esm) dependency, use this import:
+
+```javascript
+import { List } from '@toolbuilder/list/src/list.js'
 ```
 
 ## API

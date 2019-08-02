@@ -1,18 +1,21 @@
 {
   "name": "@toolbuilder/list",
-  "version": "0.1.0",
+  "version": "0.1.1-rc0",
   "description": "Tiny, mutable, double linked, iterable list",
   "main": "index.js",
   "module": "src/list.js",
+  "unpkg": "umd/list.umd.min.js",
   "scripts": {
     "build": "npm-run-all --serial test bundle docs",
-    "bundle": "rollup -c rollup.config.js",
+    "bundle": "npm-run-all --serial clean bundle:rollup",
+    "bundle:rollup": "rollup -c rollup.config.js",
+    "clean": "rimraf ./umd",
     "docs": "node -r esm ./scripts/docgen.js",
-    "prepublishOnly": "npm-run-all --serial test bundle docs",
+    "prepublishOnly": "npm run build",
     "test": "tape -r esm test/*_test.js | tap-nirvana"
   },
   "files": [
-    "src",
+    "src/list.js",
     "index.js",
     "umd"
   ],
