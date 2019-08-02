@@ -194,7 +194,7 @@ console.log([...list]) // prints ['A', 'B', 'C', 'D']
 console.log(node.value) // prints 'D'
 ```
 
-Returns **any** the newly created Node
+Returns [Node](#node) the newly created Node
 
 ### pop
 

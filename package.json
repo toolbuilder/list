@@ -1,12 +1,15 @@
 {
   "name": "@toolbuilder/list",
-  "version": "0.1.0",
+  "version": "0.1.0-rc0",
   "description": "Tiny, mutable, double linked, iterable list",
   "main": "index.js",
   "module": "src/list.js",
   "scripts": {
-    "test": "tape -r esm test/*_test.js | tap-nirvana",
-    "docs": "node -r esm ./scripts/docgen.js"
+    "build": "npm-run-all --serial test bundle docs",
+    "bundle": "rollup -c rollup.config.js",
+    "docs": "node -r esm ./scripts/docgen.js",
+    "prepublishOnly": "npm-run-all --serial test bundle docs",
+    "test": "tape -r esm test/*_test.js | tap-nirvana"
   },
   "files": [
     "src",
@@ -35,6 +38,9 @@
   "devDependencies": {
     "documentation": "^12.0.3",
     "markedpp": "^1.0.1",
+    "npm-run-all": "^4.1.5",
+    "rollup": "^1.18.0",
+    "rollup-plugin-terser": "^5.1.1",
     "tap-nirvana": "^1.1.0",
     "tape": "^4.11.0"
   }

@@ -156,7 +156,7 @@ class List {
    * Add a value to the end of the list.
    *
    * @param {any} value - to be added to end of list
-   * @returns - the newly created Node
+   * @returns {Node} - the newly created Node
    * @example
    * const list = new List(['A', 'B', 'C'])
    * const node = list.push('D')
@@ -170,7 +170,7 @@ class List {
   /**
    * Remove the last value in the list.
    *
-   * @returns - the value of the removed node, or undefined if the list was empty
+   * @returns {any} - the value of the removed node, or undefined if the list was empty
    * @example
    * const list = new List(['A', 'B', 'C'])
    * const value = list.pop()
