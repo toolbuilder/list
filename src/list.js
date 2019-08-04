@@ -206,6 +206,26 @@ class List {
   }
 
   /**
+   * Remove first node from list, and return the value. When combined with
+   * `push`, this enables `List` to work like a FIFO queue.
+   *
+   * @returns {any} the value of the first node before the call to `shift`,
+   * or undefined if the list is empty.
+   * @example
+   * const list = List.from(['A', 'B', 'C'])
+   * const value = list.shift()
+   * console.log(value) // prints 'A'
+   * console.log([...list]) // prints ['B', 'C']
+   */
+  shift () {
+    if (this.length === 0) return undefined
+    const node = this.head.next
+    const value = node.value
+    this.remove(node)
+    return value
+  }
+
+  /**
    * Generator that produces each node list in order from first to last. The value property of each node provides
    * the associated value.
    *

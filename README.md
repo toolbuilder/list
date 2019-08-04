@@ -21,6 +21,7 @@ Minimalist, mutable, double linked, iterable list.
   * [push](#push)
   * [pop](#pop)
   * [find](#find)
+  * [shift](#shift)
   * [nodes](#nodes)
   * [nodesReversed](#nodesreversed)
   * [from](#from)
@@ -251,6 +252,23 @@ console.log(node.value) // prints 'C'
 ```
 
 Returns [Node](#node) the node that contains the value. The value property will provide the value.
+
+### shift
+
+Remove first node from list, and return the value. When combined with
+`push`, this enables `List` to work like a FIFO queue.
+
+#### Examples
+
+```javascript
+const list = List.from(['A', 'B', 'C'])
+const value = list.shift()
+console.log(value) // prints 'A'
+console.log([...list]) // prints ['B', 'C']
+```
+
+Returns **any** the value of the first node before the call to `shift`,
+or undefined if the list is empty.
 
 ### nodes
 

@@ -127,6 +127,20 @@ test('pop', subtest => {
   subtest.end()
 })
 
+test('shift', subtest => {
+  let list = List.from(['A', 'B', 'C'])
+  let value = list.shift()
+  subtest.equal(value, 'A', 'shift returns the first value of the list')
+  listOk(subtest, list, ['B', 'C'], 'shift')
+
+  list = new List()
+  value = list.shift()
+  subtest.equal(value, undefined, 'shift returns undefined for empty list')
+  listOk(subtest, list, [], 'shift')
+
+  subtest.end()
+})
+
 test('Symbol.iterator', subtest => {
   const expected = ['A', 'B', 'C', 'D']
   const list = List.from(expected)
