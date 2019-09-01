@@ -141,6 +141,20 @@ test('shift', subtest => {
   subtest.end()
 })
 
+test('unshift', subtest => {
+  let list = List.from(['B', 'C', 'D'])
+  let node = list.unshift('A')
+  subtest.deepEqual(node, list.first(), 'unshift returns the first node of the list')
+  listOk(subtest, list, ['A', 'B', 'C', 'D'], 'unshift')
+
+  list = new List()
+  node = list.unshift('A')
+  subtest.deepEqual(node, list.first(), 'unshift returns first node for previously empty list')
+  listOk(subtest, list, ['A'], 'unshift')
+
+  subtest.end()
+})
+
 test('Symbol.iterator', subtest => {
   const expected = ['A', 'B', 'C', 'D']
   const list = List.from(expected)

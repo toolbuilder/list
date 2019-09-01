@@ -226,6 +226,22 @@ class List {
   }
 
   /**
+   * Push a value onto the front of the list.
+   *
+   * @param {any} value - to be added to front of list
+   * @returns {Node} - the newly created Node
+   * @example
+   * const list = new List(['B', 'C', 'D'])
+   * const node = list.unshift('A')
+   * console.log([...list]) // prints ['A', 'B', 'C', 'D']
+   * console.log(node.value) // prints 'A'
+   */
+  unshift (value) {
+    const firstNode = (this.length === 0) ? this.tail : this.head.next
+    return this.insertBefore(firstNode, value)
+  }
+
+  /**
    * Generator that produces each node list in order from first to last. The value property of each node provides
    * the associated value.
    *
