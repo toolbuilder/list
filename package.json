@@ -1,50 +1,55 @@
 {
-  "name": "@toolbuilder/list",
-  "version": "0.1.2-rc0",
-  "description": "Tiny, mutable, double linked, iterable list",
-  "main": "index.js",
-  "module": "src/list.js",
-  "unpkg": "umd/list.umd.min.js",
-  "scripts": {
-    "build": "npm-run-all --serial test bundle docs",
-    "bundle": "npm-run-all --serial clean bundle:rollup",
-    "bundle:rollup": "rollup -c rollup.config.js",
-    "clean": "rimraf ./umd",
-    "docs": "node -r esm ./scripts/docgen.js",
-    "prepublishOnly": "npm run build",
-    "test": "tape -r esm test/*_test.js | tap-nirvana"
-  },
-  "files": [
-    "src/list.js",
-    "index.js",
-    "umd"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/toolbuilder/list.git"
-  },
-  "keywords": [
-    "double",
-    "linked",
-    "list",
-    "chainable"
-  ],
-  "author": "Kevin Hudson",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/toolbuilder/list/issues"
-  },
-  "homepage": "https://github.com/toolbuilder/list#readme",
-  "dependencies": {
-    "esm": "^3.2.25"
-  },
-  "devDependencies": {
-    "documentation": "^12.0.3",
-    "markedpp": "^1.0.1",
-    "npm-run-all": "^4.1.5",
-    "rollup": "^1.18.0",
-    "rollup-plugin-terser": "^5.1.1",
-    "tap-nirvana": "^1.1.0",
-    "tape": "^4.11.0"
-  }
+ "name": "@toolbuilder/list",
+ "version": "0.1.2-rc0",
+ "description": "Tiny, mutable, double linked, iterable list",
+ "main": "index.js",
+ "module": "src/list.js",
+ "unpkg": "umd/list.umd.min.js",
+ "scripts": {
+  "build": "npm-run-all --serial test bundle docs",
+  "bundle": "npm-run-all --serial clean bundle:rollup",
+  "bundle:rollup": "rollup -c rollup.config.js",
+  "clean": "rimraf ./umd",
+  "docs": "node -r esm ./scripts/docgen.js",
+  "prepublishOnly": "npm run build",
+  "test": "tape -r esm test/*_test.js | tap-nirvana"
+ },
+ "files": [
+  "src/list.js",
+  "index.js",
+  "umd"
+ ],
+ "repository": {
+  "type": "git",
+  "url": "https://github.com/toolbuilder/list.git"
+ },
+ "keywords": [
+  "double",
+  "linked",
+  "list",
+  "chainable"
+ ],
+ "author": "Kevin Hudson",
+ "license": "MIT",
+ "bugs": {
+  "url": "https://github.com/toolbuilder/list/issues"
+ },
+ "homepage": "https://github.com/toolbuilder/list#readme",
+ "dependencies": {
+  "esm": "^3.2.25"
+ },
+ "devDependencies": {
+  "@toolbuilder/eslint-config": ">=0.1.2",
+  "documentation": "^12.0.3",
+  "markedpp": "^1.0.1",
+  "npm-run-all": "^4.1.5",
+  "rollup": "^1.18.0",
+  "rollup-plugin-terser": "^5.1.1",
+  "tap-nirvana": "^1.1.0",
+  "tape": "^4.11.0",
+  "eslint": ">=6.8.0"
+ },
+ "eslintConfig": {
+  "extends": "@toolbuilder/eslint-config"
+ }
 }
