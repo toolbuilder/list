@@ -1,4 +1,4 @@
-import test from 'tape'
+import { test } from 'zora'
 import { List } from '../src/list.js'
 
 const listOk = (test, list, expected, methodName) => {
@@ -18,7 +18,6 @@ test('constructor', (subtest) => {
   subtest.deepEqual(Array.from(list), expected, 'list constructor uses iterable when provided')
   subtest.equal(list.length, 3, 'construction from iterable sets length property correctly')
   listOk(subtest, list, expected, 'constructor')
-  subtest.end()
 })
 
 test('from', subtest => {
@@ -27,7 +26,6 @@ test('from', subtest => {
 
   list = List.from('ABCD')
   listOk(subtest, list, Array.from('ABCD'), 'from')
-  subtest.end()
 })
 
 test('of', subtest => {
@@ -36,24 +34,34 @@ test('of', subtest => {
 
   list = List.of('A', 'B', 'C', 'D')
   listOk(subtest, list, Array.from('ABCD'), 'of')
-
-  subtest.end()
 })
 
 test('first', subtest => {
   let list = new List()
   subtest.equal(list.first(), undefined, 'first element of empty list is undefined')
-  list = new List([1, 2, 3])
-  subtest.equal(list.first().value, 1, 'first returns first node of non-empty list')
-  subtest.end()
+  list = List.from(['a', 'b', 'c'])
+  subtest.equal(list.first(), 'a', 'first returns first value of non-empty list')
 })
 
 test('last', subtest => {
+  let list = List.from()
+  subtest.equal(list.last(), undefined, 'last element of empty list is undefined')
+  list = List.from(['A', 'B', 'C'])
+  subtest.equal(list.last(), 'C', 'last returns last value of non-empty list')
+})
+
+test('firstNode', subtest => {
   let list = new List()
-  subtest.equal(list.last(), undefined, 'first element of empty list is undefined')
+  subtest.equal(list.firstNode(), undefined, 'first node of empty list is undefined')
   list = new List([1, 2, 3])
-  subtest.equal(list.last().value, 3, 'first returns first node of non-empty list')
-  subtest.end()
+  subtest.equal(list.firstNode().value, 1, 'firstNode returns first node of non-empty list')
+})
+
+test('lastNode', subtest => {
+  let list = new List()
+  subtest.equal(list.lastNode(), undefined, 'last node of empty list is undefined')
+  list = new List([1, 2, 3])
+  subtest.equal(list.lastNode().value, 3, 'lastNode returns first node of non-empty list')
 })
 
 test('find', subtest => {
@@ -65,7 +73,6 @@ test('find', subtest => {
   subtest.equal(list.find((v) => v === 'C').value, 'C', 'find locates node in middle of list')
   subtest.equal(list.find((v) => v === 'D').value, 'D', 'find locates node at end of list')
   subtest.equal(list.find((v) => v === 'Z'), undefined, 'find returns undefined when item not present')
-  subtest.end()
 })
 
 test('insert after', subtest => {
@@ -76,7 +83,6 @@ test('insert after', subtest => {
   list = new List(['A', 'B', 'D'])
   list.insertAfter(list.find((v) => v === 'B'), 'C')
   listOk(subtest, list, ['A', 'B', 'C', 'D'], 'insertAfter')
-  subtest.end()
 })
 
 test('insert before', subtest => {
@@ -87,7 +93,6 @@ test('insert before', subtest => {
   list = new List(['A', 'B', 'D'])
   list.insertBefore(list.find((v) => v === 'D'), 'C')
   listOk(subtest, list, ['A', 'B', 'C', 'D'], 'insertBefore')
-  subtest.end()
 })
 
 test('remove', subtest => {
@@ -98,7 +103,6 @@ test('remove', subtest => {
   list = new List(['A', 'B', 'D'])
   list.remove(list.find((v) => v === 'D'))
   listOk(subtest, list, ['A', 'B'], 'remove')
-  subtest.end()
 })
 
 test('push', (subtest) => {
@@ -108,7 +112,6 @@ test('push', (subtest) => {
   listOk(subtest, list, ['A'], 'push')
   list.push('B')
   listOk(subtest, list, ['A', 'B'], 'push')
-  subtest.end()
 })
 
 test('pop', subtest => {
@@ -123,8 +126,6 @@ test('pop', subtest => {
   list = new List('ABCD') // String is iterable, so this works
   subtest.equal(list.pop(), 'D', 'pop returns popped value from list')
   listOk(subtest, list, ['A', 'B', 'C'], 'pop')
-
-  subtest.end()
 })
 
 test('shift', subtest => {
@@ -137,22 +138,18 @@ test('shift', subtest => {
   value = list.shift()
   subtest.equal(value, undefined, 'shift returns undefined for empty list')
   listOk(subtest, list, [], 'shift')
-
-  subtest.end()
 })
 
 test('unshift', subtest => {
   let list = List.from(['B', 'C', 'D'])
   let node = list.unshift('A')
-  subtest.deepEqual(node, list.first(), 'unshift returns the first node of the list')
+  subtest.deepEqual(node, list.firstNode(), 'unshift returns the first node of the list')
   listOk(subtest, list, ['A', 'B', 'C', 'D'], 'unshift')
 
   list = new List()
   node = list.unshift('A')
-  subtest.deepEqual(node, list.first(), 'unshift returns first node for previously empty list')
+  subtest.deepEqual(node, list.firstNode(), 'unshift returns first node for previously empty list')
   listOk(subtest, list, ['A'], 'unshift')
-
-  subtest.end()
 })
 
 test('Symbol.iterator', subtest => {
@@ -163,7 +160,6 @@ test('Symbol.iterator', subtest => {
     actual.push(value)
   }
   subtest.deepEqual(actual, expected, 'Symbol.iterator provided all nodes of list in order')
-  subtest.end()
 })
 
 test('nodes', subtest => {
@@ -178,7 +174,6 @@ test('nodes', subtest => {
     actual.push(node.value)
   }
   subtest.deepEqual(actual, expected, 'nodes provided all nodes of list in order')
-  subtest.end()
 })
 
 test('nodesReversed', subtest => {
@@ -192,5 +187,4 @@ test('nodesReversed', subtest => {
     actual.push(node.value)
   }
   subtest.deepEqual(actual, ['A', 'B', 'C'], 'nodesReversed provided all nodes of list in reverse order')
-  subtest.end()
 })

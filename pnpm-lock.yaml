@@ -6,10 +6,12 @@ devDependencies:
   eslint: 6.8.0
   markedpp: 1.0.1
   npm-run-all: 4.1.5
+  rimraf: 3.0.2
   rollup: 1.18.0
   rollup-plugin-terser: 5.1.1_rollup@1.18.0
   tap-nirvana: 1.1.0
   tape: 4.11.0
+  zora: 3.1.8
 lockfileVersion: 5.1
 packages:
   /@babel/code-frame/7.5.5:
@@ -2415,6 +2417,17 @@ packages:
     dev: true
     resolution:
       integrity: sha512-hkLPepehmnKk41pUGm3sYxoFs/umurYfYJCerbXEyFIWcAzvpipAgVkBqqT9RBKMGjnq6kMuyYwha6csxbiM1A==
+  /glob/7.1.6:
+    dependencies:
+      fs.realpath: 1.0.0
+      inflight: 1.0.6
+      inherits: 2.0.4
+      minimatch: 3.0.4
+      once: 1.4.0
+      path-is-absolute: 1.0.1
+    dev: true
+    resolution:
+      integrity: sha512-LwaxwyZ72Lk7vZINtNNrywX0ZuLyStrdDtabefZKAY5ZGJhVtgdznluResxNmPitE0SAO+O26sWTHeKSI2wMBA==
   /globals-docs/2.4.0:
     dev: true
     resolution:
@@ -4192,6 +4205,13 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-mwqeW5XsA2qAejG46gYdENaxXjx9onRNCfn7L0duuP4hCuTIi/QO7PDK07KJfp1d+izWPrzEJDcSqBa0OZQriA==
+  /rimraf/3.0.2:
+    dependencies:
+      glob: 7.1.6
+    dev: true
+    hasBin: true
+    resolution:
+      integrity: sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA==
   /rollup-plugin-terser/5.1.1_rollup@1.18.0:
     dependencies:
       '@babel/code-frame': 7.5.5
@@ -5252,6 +5272,10 @@ packages:
     dev: true
     resolution:
       integrity: sha512-Lhz8TLaYnxq/2ObqHDql8dX8CJi97oHxrjUcYtzKbbykPtVW9WB+poxI+NM2UIzsMgNCZTIf0AQwsjK5yMAqZw==
+  /zora/3.1.8:
+    dev: true
+    resolution:
+      integrity: sha512-AArEyKiLWi3eLXW2uRbfPvANfSQgV8VHoCuXCihCTQyUv7brFrghGbsUqKxqucc+QodQ1G2+O8Gpsz8RVpeiRQ==
 specifiers:
   '@toolbuilder/eslint-config': '>=0.1.2'
   documentation: ^12.0.3
@@ -5259,7 +5283,9 @@ specifiers:
   esm: ^3.2.25
   markedpp: ^1.0.1
   npm-run-all: ^4.1.5
+  rimraf: ^3.0.2
   rollup: ^1.18.0
   rollup-plugin-terser: ^5.1.1
   tap-nirvana: ^1.1.0
   tape: ^4.11.0
+  zora: ^3.1.8

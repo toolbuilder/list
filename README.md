@@ -15,6 +15,8 @@ Minimalist, mutable, double linked, iterable list.
   * [constructor](#constructor)
   * [first](#first)
   * [last](#last)
+  * [firstNode](#firstnode)
+  * [lastNode](#lastnode)
   * [insertAfter](#insertafter)
   * [insertBefore](#insertbefore)
   * [remove](#remove)
@@ -22,11 +24,13 @@ Minimalist, mutable, double linked, iterable list.
   * [pop](#pop)
   * [find](#find)
   * [shift](#shift)
+  * [unshift](#unshift)
   * [nodes](#nodes)
   * [nodesReversed](#nodesreversed)
   * [from](#from)
   * [of](#of)
   * [Symbol.iterator](#symboliterator)
+* [Releases](#releases)
 * [Contributing](#contributing)
 * [Issues](#issues)
 * [License](#license)
@@ -55,25 +59,45 @@ Both packages create a global variable representing the list as `DoubleLinkedLis
 
 ## Getting Started
 
-To access as the Node version, use this import:
+This is the import for require:
 
 ```javascript
 let { List } = require('@toolbuilder/list')
 
 const list = new List()
 list.push('A')
-const node = list.first()
-list.insertAfter(node, 'B')
-console.log(list.last().value) // prints 'B'
+console.log(list.first()) // prints 'A'
+list.insertAfter(list.firstNode(), 'B')
+console.log(list.last()) // prints 'B'
 ```
 
-To access the pure list with no [esm](https://www.npmjs.com/package/esm) dependency, use this import:
+This is the import for JavaScript modules:
+
+```javascript
+import { List } from '@toolbuilder/list'
+```
+
+For bundlers, the `module` property of 'package.json' points directly to the module version of `List`. You can also import it directly:
 
 ```javascript
 import { List } from '@toolbuilder/list/src/list.js'
 ```
 
 ## API
+
+Some methods work with `Node` objects to change the structure of the list. For convenience, other methods provide the values directly. For example, `List.first()` returns the value of the first element, and `List.firstNode()` returns the first `Node`. `Nodes` are required for operations such as `List.insertBefore(node, value)` and `List.remove(node)`.
+
+These methods are value based:
+* [first](#first)
+* [last](#last)
+* [push](#push) - returns a Node, but accepts a value
+* [pop](#pop)
+* [shift](#shift)
+* [unshift](#unshift) - returns a Node, but accepts a value
+* [from](#from)
+* [of](#of)
+* [Symbol.iterator](#symboliterator)
+
 
 API documentation follows.
 
@@ -83,7 +107,7 @@ The Node object is used by [insertBefore](#insertbefore) and [insertAfter](#inse
 
 ```javascript
 const list = List.of('A', 'C')
-list.insertAfter(list.first(), 'B')
+list.insertAfter(list.firstNode(), 'B')
 console.log([...list]) // prints ['A', 'B', 'C']
 ```
 
@@ -91,7 +115,7 @@ The Node object has a `value` property, which provides the value associated with
 
 ```javascript
 const list = List.of('A')
-const node = list.first()
+const node = list.firstNode()
 console.log(node.value) // prints 'A'
 ```
 
@@ -115,27 +139,53 @@ console.log([...list]) // prints [1, 2, 3]
 
 ### first
 
-Provide the first node in the list. Returns undefined if list is empty.
+Provides the first value in the list. Returns undefined if the list is empty.
 
 #### Examples
 
 ```javascript
 const list = List.from(['a', 'b', 'c'])
-const node = list.first()
-console.log(node.value) // prints 'a'
+console.log(list.first()) // prints 'a'
 ```
 
-Returns [Node](#node) first node in list
+Returns **any** first value in list
 
 ### last
 
-Provide the last node in the list. Returns undefined if list is empty.
+Provides the last value in the list. Returns undefined if the list is empty.
 
 #### Examples
 
 ```javascript
 const list = List.from(['A', 'B', 'C'])
-const node = list.last()
+console.log(list.last()) // prints 'C'
+```
+
+Returns **any** last value in the list
+
+### firstNode
+
+Provides the first node in the list. Returns undefined if list is empty.
+
+#### Examples
+
+```javascript
+const list = List.from(['a', 'b', 'c'])
+const node = list.firstNode()
+console.log(node.value) // prints 'a'
+```
+
+Returns [Node](#node) first node in list
+
+### lastNode
+
+Provides the last node in the list. Returns undefined if list is empty.
+
+#### Examples
+
+```javascript
+const list = List.from(['A', 'B', 'C'])
+const node = list.lastNode()
 console.log(node.value) // prints 'C'
 ```
 
@@ -270,6 +320,25 @@ console.log([...list]) // prints ['B', 'C']
 Returns **any** the value of the first node before the call to `shift`,
 or undefined if the list is empty.
 
+### unshift
+
+Push a value onto the front of the list.
+
+#### Parameters
+
+- `value` **any** to be added to front of list
+
+#### Examples
+
+```javascript
+const list = new List(['B', 'C', 'D'])
+const node = list.unshift('A')
+console.log([...list]) // prints ['A', 'B', 'C', 'D']
+console.log(node.value) // prints 'A'
+```
+
+Returns [Node](#node) the newly created Node
+
 ### nodes
 
 Generator that produces each node list in order from first to last. The value property of each node provides
@@ -352,6 +421,10 @@ Returns [Generator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 [3]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
 <!-- /include -->
 
+## Releases
+
+* 1.0.0 - Has breaking changes. The methods `first` and `last` now return a value instead of a `Node`. New methods `firstNode` and `lastNode` provide access to the `Nodes`.
+
 ## Contributing
 
 Contributions are welcome. Please create a pull request. Linting with [standard](https://standardjs.com/), version 13.1.0.
@@ -373,4 +446,3 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 <!-- /include -->
-

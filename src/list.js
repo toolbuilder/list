@@ -64,28 +64,53 @@ class List {
   }
 
   /**
-   * Provide the first node in the list. Returns undefined if list is empty.
+   * Provides the first value in the list. Returns undefined if the list is empty.
+   *
+   * @returns {any} - first value in list
+   * @example
+   * const list = List.from(['a', 'b', 'c'])
+   * console.log(list.first()) // prints 'a'
+   */
+  first () {
+    return (this.length === 0) ? undefined : this.firstNode().value
+  }
+
+  /**
+   * Provides the last value in the list. Returns undefined if the list is empty.
+   *
+   * @returns {any} - last value in the list
+   * @example
+   * const list = List.from(['A', 'B', 'C'])
+   * console.log(list.last()) // prints 'C'
+   */
+
+  last () {
+    return (this.length === 0) ? undefined : this.lastNode().value
+  }
+
+  /**
+   * Provides the first node in the list. Returns undefined if list is empty.
    *
    * @returns {Node} - first node in list
    * @example
    * const list = List.from(['a', 'b', 'c'])
-   * const node = list.first()
+   * const node = list.firstNode()
    * console.log(node.value) // prints 'a'
    */
-  first () {
+  firstNode () {
     return (this.length === 0) ? undefined : this.head.next
   }
 
   /**
-   * Provide the last node in the list. Returns undefined if list is empty.
+   * Provides the last node in the list. Returns undefined if list is empty.
    *
    * @returns {Node} - last node in list
    * @example
    * const list = List.from(['A', 'B', 'C'])
-   * const node = list.last()
+   * const node = list.lastNode()
    * console.log(node.value) // prints 'C'
    */
-  last () {
+  lastNode () {
     return (this.length === 0) ? undefined : this.tail.prev
   }
 
