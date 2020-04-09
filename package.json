@@ -1,40 +1,44 @@
 {
  "name": "@toolbuilder/list",
- "version": "1.0.0-rc0",
+ "version": "1.0.0-rc1",
  "description": "Tiny, mutable, double linked, iterable list",
- "main": "index.js",
- "module": "src/list.js",
- "unpkg": "umd/list.umd.min.js",
- "scripts": {
-  "build": "npm-run-all --serial test bundle docs",
-  "bundle": "npm-run-all --serial clean bundle:rollup",
-  "bundle:rollup": "rollup -c rollup.config.js",
-  "clean": "rimraf ./umd",
-  "docs": "node -r esm ./scripts/docgen.js",
-  "prepublishOnly": "npm run build",
-  "test": "tape -r esm test/*_test.js | tap-nirvana"
- },
- "files": [
-  "src/list.js",
-  "index.js",
-  "umd"
- ],
- "repository": {
-  "type": "git",
-  "url": "https://github.com/toolbuilder/list.git"
- },
  "keywords": [
   "double",
   "linked",
   "list",
   "chainable"
  ],
- "author": "Kevin Hudson",
- "license": "MIT",
+ "homepage": "https://github.com/toolbuilder/list#readme",
  "bugs": {
   "url": "https://github.com/toolbuilder/list/issues"
  },
- "homepage": "https://github.com/toolbuilder/list#readme",
+ "repository": {
+  "type": "git",
+  "url": "https://github.com/toolbuilder/list.git"
+ },
+ "license": "MIT",
+ "author": "Kevin Hudson",
+ "main": "index.js",
+ "unpkg": "umd/list.umd.min.js",
+ "module": "src/list.js",
+ "files": [
+  "src/list.js",
+  "index.js",
+  "umd"
+ ],
+ "scripts": {
+  "build": "npm-run-all --serial sortPkg test bundle docs",
+  "bundle": "npm-run-all --serial clean bundle:rollup",
+  "bundle:rollup": "rollup -c rollup.config.js",
+  "clean": "rimraf ./umd",
+  "docs": "node -r esm ./scripts/docgen.js",
+  "prepublishOnly": "npm run build",
+  "sortPkg": "sort-package-json",
+  "test": "tape -r esm test/*_test.js | tap-nirvana"
+ },
+ "eslintConfig": {
+  "extends": "@toolbuilder/eslint-config"
+ },
  "dependencies": {
   "esm": "^3.2.25"
  },
@@ -47,11 +51,9 @@
   "rimraf": "^3.0.2",
   "rollup": "^1.18.0",
   "rollup-plugin-terser": "^5.1.1",
+  "sort-package-json": "^1.41.0",
   "tap-nirvana": "^1.1.0",
   "tape": "^4.11.0",
   "zora": "^3.1.8"
- },
- "eslintConfig": {
-  "extends": "@toolbuilder/eslint-config"
  }
 }

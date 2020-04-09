@@ -1,6 +1,6 @@
 # List
 
-Minimalist, mutable, double linked, iterable list.
+Small, mutable, double linked, iterable list.
 
 `List` supports iteration over values and nodes. If you wish to have functions like map, filter, forEach, and such, please use an iterable or Observable library. One such possibility is [Iterablefu](https://github.com/toolbuilder/iterablefu).
 
@@ -63,12 +63,6 @@ This is the import for require:
 
 ```javascript
 let { List } = require('@toolbuilder/list')
-
-const list = new List()
-list.push('A')
-console.log(list.first()) // prints 'A'
-list.insertAfter(list.firstNode(), 'B')
-console.log(list.last()) // prints 'B'
 ```
 
 This is the import for JavaScript modules:
@@ -81,6 +75,22 @@ For bundlers, the `module` property of 'package.json' points directly to the mod
 
 ```javascript
 import { List } from '@toolbuilder/list/src/list.js'
+```
+
+Quick example:
+
+```javascript
+import { List } from '@toolbuilder/list'
+
+const list = new List(['A', 'B', 'D'])
+list.push('E') // add 'E' to the end
+console.log(list.first()) // prints 'A'
+const node = list.find(value => value === 'B')
+list.insertAfter(node, 'C') // list is ['A', 'B', 'C', 'D', 'E'] now
+console.log(list.last()) // prints 'B'
+for (const value of list) {
+  // do something here
+}
 ```
 
 ## API
@@ -97,7 +107,6 @@ These methods are value based:
 * [from](#from)
 * [of](#of)
 * [Symbol.iterator](#symboliterator)
-
 
 API documentation follows.
 
@@ -344,6 +353,8 @@ Returns [Node](#node) the newly created Node
 Generator that produces each node list in order from first to last. The value property of each node provides
 the associated value.
 
+Unexpected results may happen if the list structure is modified during iteration.
+
 #### Examples
 
 ```javascript
@@ -360,6 +371,8 @@ Returns [Generator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 ### nodesReversed
 
 Generator that produces each node in order from last to first.
+
+Unexpected results may happen if the list structure is modified during iteration.
 
 Returns [Generator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator) 
 

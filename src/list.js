@@ -270,6 +270,8 @@ class List {
    * Generator that produces each node list in order from first to last. The value property of each node provides
    * the associated value.
    *
+   * Unexpected results may happen if the list structure is modified during iteration.
+   *
    * @returns {Generator}
    * @example
    * const list = List.from([1, 2, 3, 4])
@@ -289,6 +291,8 @@ class List {
 
   /**
    * Generator that produces each node in order from last to first.
+   *
+   * Unexpected results may happen if the list structure is modified during iteration.
    *
    * @returns {Generator}
    */
