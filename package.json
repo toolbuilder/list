@@ -1,6 +1,6 @@
 {
  "name": "@toolbuilder/list",
- "version": "1.0.0",
+ "version": "1.0.1-rc0",
  "description": "Tiny, mutable, double linked, iterable list",
  "keywords": [
   "double",
@@ -43,17 +43,17 @@
   "esm": "^3.2.25"
  },
  "devDependencies": {
-  "@toolbuilder/eslint-config": ">=0.1.2",
-  "documentation": "^12.0.3",
-  "eslint": ">=6.8.0",
+  "@toolbuilder/eslint-config": "^0.1.2",
+  "documentation": "^12.3.0",
+  "eslint": "^6.8.0",
   "markedpp": "^1.0.1",
   "npm-run-all": "^4.1.5",
   "rimraf": "^3.0.2",
-  "rollup": "^1.18.0",
-  "rollup-plugin-terser": "^5.1.1",
+  "rollup": "^2.3.4",
+  "rollup-plugin-terser": "^5.3.0",
   "sort-package-json": "^1.41.0",
   "tap-nirvana": "^1.1.0",
-  "tape": "^4.11.0",
+  "tape": "^4.13.2",
   "zora": "^3.1.8"
  }
 }
