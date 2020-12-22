@@ -64,6 +64,22 @@ test('lastNode', subtest => {
   subtest.equal(list.lastNode().value, 3, 'lastNode returns first node of non-empty list')
 })
 
+test('nextNode', subtest => {
+  let list = List.from()
+  subtest.deepEqual(list.nextNode(undefined), undefined, 'next node after undefined is undefined')
+  list = List.from(['A', 'B', 'C'])
+  subtest.deepEqual(list.nextNode(list.lastNode()), undefined, 'next node after last node is undefined')
+  subtest.deepEqual(list.nextNode(list.firstNode()).value, 'B', 'returns next node when it is in list')
+})
+
+test('previousNode', subtest => {
+  let list = List.from()
+  subtest.deepEqual(list.previousNode(undefined), undefined, 'previous node before undefined is undefined')
+  list = List.of('A', 'B', 'C')
+  subtest.deepEqual(list.previousNode(list.firstNode()), undefined, 'previous node of first node is undefined')
+  subtest.deepEqual(list.previousNode(list.lastNode()).value, 'B', 'returns previous node when it is in the list')
+})
+
 test('find', subtest => {
   let list = new List()
   subtest.equal(list.find((v) => v === 'Z'), undefined, 'find returns undefined when list is empty')

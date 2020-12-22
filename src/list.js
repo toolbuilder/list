@@ -115,6 +115,36 @@ class List {
   }
 
   /**
+   * Provides the node that comes before the provided node.
+   *
+   * @param {Node} node - any Node element provided by the List instance
+   * @returns {Node} value - the Node that comes before provided node or undefined if provided node is the first node or undefined.
+   * @example
+   * const list = List.from(['A', 'B', 'C'])
+   * const node = list.lastNode()
+   * const prevNode = list.previousNode(node)
+   * console.log(prevNode.value) // prints 'B'
+   */
+  previousNode (node) {
+    return (node && node.prev !== this.head) ? node.prev : undefined
+  }
+
+  /**
+   * Provides the node that comes after the provided node.
+   *
+   * @param {Node} node - any Node element provided by the List instance
+   * @returns {Node} value - the Node that follows provided node or undefined if provided node is the last node or undefined.
+   * @example
+   * const list = List.from(['A', 'B', 'C'])
+   * const node = list.firstNode()
+   * const nextNode = list.nextNode(node)
+   * console.log(nextNode.value) // prints 'B'
+   */
+  nextNode (node) {
+    return (node && node.next !== this.tail) ? node.next : undefined
+  }
+
+  /**
    * Insert value after a node.
    *
    * @param {Node} prevNode - node from this list to insert value behind

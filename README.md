@@ -17,6 +17,8 @@ Small, mutable, double linked, iterable list.
   * [last](#last)
   * [firstNode](#firstnode)
   * [lastNode](#lastnode)
+  * [previousNode](#previousnode)
+  * [nextNode](#nextnode)
   * [insertAfter](#insertafter)
   * [insertBefore](#insertbefore)
   * [remove](#remove)
@@ -98,6 +100,7 @@ for (const value of list) {
 Some methods work with `Node` objects to change the structure of the list. For convenience, other methods provide the values directly. For example, `List.first()` returns the value of the first element, and `List.firstNode()` returns the first `Node`. `Nodes` are required for operations such as `List.insertBefore(node, value)` and `List.remove(node)`.
 
 These methods are value based:
+
 * [first](#first)
 * [last](#last)
 * [push](#push) - returns a Node, but accepts a value
@@ -199,6 +202,44 @@ console.log(node.value) // prints 'C'
 ```
 
 Returns [Node](#node) last node in list
+
+### previousNode
+
+Provides the node that comes before the provided node.
+
+#### Parameters
+
+- `node` [Node](#node) any Node element provided by the List instance
+
+#### Examples
+
+```javascript
+const list = List.from(['A', 'B', 'C'])
+const node = list.lastNode()
+const prevNode = list.previousNode(node)
+console.log(prevNode.value) // prints 'B'
+```
+
+Returns [Node](#node) value - the Node that comes before provided node or undefined if provided node is the first node or undefined.
+
+### nextNode
+
+Provides the node that comes after the provided node.
+
+#### Parameters
+
+- `node` [Node](#node) any Node element provided by the List instance
+
+#### Examples
+
+```javascript
+const list = List.from(['A', 'B', 'C'])
+const node = list.firstNode()
+const nextNode = list.nextNode(node)
+console.log(nextNode.value) // prints 'B'
+```
+
+Returns [Node](#node) value - the Node that follows provided node or undefined if provided node is the last node or undefined.
 
 ### insertAfter
 
