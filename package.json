@@ -1,59 +1,73 @@
 {
- "name": "@toolbuilder/list",
- "version": "1.0.1-rc0",
- "description": "Tiny, mutable, double linked, iterable list",
- "keywords": [
-  "double",
-  "linked",
-  "list",
-  "chainable"
- ],
- "homepage": "https://github.com/toolbuilder/list#readme",
- "bugs": {
-  "url": "https://github.com/toolbuilder/list/issues"
- },
- "repository": {
-  "type": "git",
-  "url": "https://github.com/toolbuilder/list.git"
- },
- "license": "MIT",
- "author": "Kevin Hudson",
- "main": "index.js",
- "unpkg": "umd/list.umd.min.js",
- "module": "src/list.js",
- "files": [
-  "src/list.js",
-  "index.js",
-  "umd"
- ],
- "scripts": {
-  "build": "npm-run-all --serial sortPkg test bundle docs",
-  "bundle": "npm-run-all --serial clean bundle:rollup",
-  "bundle:rollup": "rollup -c rollup.config.js",
-  "clean": "rimraf ./umd",
-  "docs": "node -r esm ./scripts/docgen.js",
-  "prepublishOnly": "npm run build",
-  "sortPkg": "sort-package-json",
-  "test": "tape -r esm test/*_test.js | tap-nirvana"
- },
- "eslintConfig": {
-  "extends": "@toolbuilder/eslint-config"
- },
- "dependencies": {
-  "esm": "^3.2.25"
- },
- "devDependencies": {
-  "@toolbuilder/eslint-config": "^0.1.2",
-  "documentation": "^12.3.0",
-  "eslint": "^6.8.0",
-  "markedpp": "^1.0.1",
-  "npm-run-all": "^4.1.5",
-  "rimraf": "^3.0.2",
-  "rollup": "^2.3.4",
-  "rollup-plugin-terser": "^5.3.0",
-  "sort-package-json": "^1.41.0",
-  "tap-nirvana": "^1.1.0",
-  "tape": "^4.13.2",
-  "zora": "^3.1.8"
- }
+  "name": "@toolbuilder/list",
+  "version": "1.0.0",
+  "description": "Tiny, mutable, double linked, iterable list.",
+  "keywords": [
+    "double",
+    "linked",
+    "list",
+    "chainable"
+  ],
+  "homepage": "https://github.com/toolbuilder/list#readme",
+  "bugs": {
+    "url": "https://github.com/toolbuilder/list/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/toolbuilder/list.git"
+  },
+  "license": "MIT",
+  "author": "Kevin Hudson",
+  "main": "index.js",
+  "unpkg": "umd/list.umd.min.js",
+  "module": "src/list.js",
+  "files": [
+    "src/list.js",
+    "index.js",
+    "umd"
+  ],
+  "scripts": {
+    "build": "run-s bundle build:docs",
+    "build:docs": "node -r esm ./scripts/docgen.js",
+    "bundle": "run-s bundle:clean bundle:rollup",
+    "bundle:clean": "rimraf ./umd",
+    "bundle:rollup": "rollup -c rollup.config.js",
+    "precheck": "run-s build",
+    "check": "run-s check:*",
+    "check:packagejson": "npmPkgJsonLint .",
+    "check:packfile": "rollup --config node:@toolbuilder/rollup-config-pkgtest",
+    "check:src": "eslint src test",
+    "check:test": "run-s test",
+    "check:uncommitted": "uncommitted",
+    "prerelease": "run-s check",
+    "release": "standard-version",
+    "test": "tape -r esm \"test/*test.js\""
+  },
+  "eslintConfig": {
+    "extends": "@toolbuilder/eslint-config"
+  },
+  "dependencies": {
+    "esm": "^3.2.25"
+  },
+  "devDependencies": {
+    "@toolbuilder/eslint-config": "^0.1.4",
+    "@toolbuilder/package-json-lint-config": "^0.1.0",
+    "@toolbuilder/rollup-config-pkgtest": "^0.1.2",
+    "documentation": "^13.1.0",
+    "eslint": "^7.16.0",
+    "markedpp": "^1.0.2",
+    "npm-package-json-lint": "^5.1.0",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.35.1",
+    "rollup-plugin-terser": "^7.0.2",
+    "standard-version": "^9.0.0",
+    "tap-nirvana": "^1.1.0",
+    "tape": "^5.0.1",
+    "uncommitted": "^1.0.0",
+    "zora": "^4.0.1"
+  },
+  "npmpackagejsonlint": {
+    "extends": "@toolbuilder/package-json-lint-config"
+  }
 }
