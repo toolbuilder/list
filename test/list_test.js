@@ -204,3 +204,72 @@ test('nodesReversed', subtest => {
   }
   subtest.deepEqual(actual, ['A', 'B', 'C'], 'nodesReversed provided all nodes of list in reverse order')
 })
+
+const rangeTestCases = () => {
+  const listToBeIterated = List.from(['A', 'B', 'C', 'D'])
+  const bNode = listToBeIterated.nextNode(listToBeIterated.firstNode())
+  const cNode = listToBeIterated.previousNode(listToBeIterated.lastNode())
+
+  return [
+    [
+      'default parameters provide entire list',
+      listToBeIterated,
+      [undefined, undefined], // first param, second param
+      ['A', 'B', 'C', 'D']
+    ],
+    [
+      'a single parameter indicates starting node',
+      listToBeIterated,
+      [bNode, undefined],
+      ['B', 'C', 'D']
+    ],
+    [
+      'undefined first parameter is same as list.firstNode()',
+      listToBeIterated,
+      [undefined, listToBeIterated.lastNode()], // stops just before last node
+      ['A', 'B', 'C']
+    ],
+    [
+      'empty iterator if both parameters are the same and not undefined',
+      listToBeIterated,
+      [bNode, bNode],
+      []
+    ],
+    [
+      'iterator stops before node of second parameter',
+      listToBeIterated,
+      [listToBeIterated.firstNode(), cNode],
+      ['A', 'B']
+    ]
+  ]
+}
+
+test('nodes with range parameters', subtest => {
+  rangeTestCases().forEach(([description, list, parameters, expected]) => {
+    const [first, last] = parameters
+    const actual = []
+    for (const node of list.nodes(first, last)) {
+      actual.push(node.value)
+    }
+    subtest.deepEqual(actual, expected, description)
+  })
+})
+
+test('Symbol.iterator with range parameters', subtest => {
+  rangeTestCases().forEach(([description, list, parameters, expected]) => {
+    const [first, last] = parameters
+    const actual = []
+    for (const value of list[Symbol.iterator](first, last)) {
+      actual.push(value)
+    }
+    subtest.deepEqual(actual, expected, description)
+  })
+})
+
+test('slice', subtest => {
+  rangeTestCases().forEach(([description, list, parameters, expected]) => {
+    const [first, last] = parameters
+    const actual = [...list.slice(first, last)]
+    subtest.deepEqual(actual, expected, description)
+  })
+})

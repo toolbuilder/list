@@ -27,6 +27,7 @@ Small, mutable, double linked, iterable list.
   * [find](#find)
   * [shift](#shift)
   * [unshift](#unshift)
+  * [slice](#slice)
   * [nodes](#nodes)
   * [nodesReversed](#nodesreversed)
   * [from](#from)
@@ -389,12 +390,44 @@ console.log(node.value) // prints 'A'
 
 Returns [Node](#node) the newly created Node
 
+### slice
+
+Creates a shallow copy of the list, with optional parameters to create a subset of
+the original list.
+
+#### Parameters
+
+- `firstNode` [Node](#node) copy starts with this node. If firstNode is undefined, the first value of the copy
+  is list.first().
+- `lastNode` [Node](#node) last value of copy is list.previousNode(lastNode).value. If lastNode is undefined, the last
+  value of the copy is list.last()
+
+#### Examples
+
+```javascript
+const list = List.of('A', 'B', 'C', 'D', 'E')
+const cNode = list.find(c => c === 'C')
+console.log([...list.slice()]) // prints ['A', 'B', 'C', 'D', 'E']
+console.log([...list.slice(cNode)]) // prints ['C', 'D', 'E']
+console.log([...list.slice(list.firstNode(), cNode)]) // prints ['A', 'B']
+console.log([...list.slice(cNode, cNode)]) // prints []
+```
+
+Returns **List** a shallow copy of the list with the specified values
+
 ### nodes
 
 Generator that produces each node list in order from first to last. The value property of each node provides
 the associated value.
 
 Unexpected results may happen if the list structure is modified during iteration.
+
+#### Parameters
+
+- `first` [Node](#node) iteration starts with this node. If first is undefined, the first node returned
+  is list.firstNode().
+- `last` [Node](#node) last node returned is list.previousNode(last). If last is undefined, the last
+  node returned is list.lastNode()
 
 #### Examples
 
@@ -454,6 +487,13 @@ Returns **List**
 ### Symbol.iterator
 
 Iterable protocol over the _values_ in the list.
+
+#### Parameters
+
+- `firstNode` [Node](#node) iteration starts with this node. If firstNode is undefined, the first value returned
+  is list.first().
+- `lastNode` [Node](#node) last value returned is list.previousNode(lastNode).value. If lastNode is undefined, the last
+  value returned is list.last()
 
 #### Examples
 

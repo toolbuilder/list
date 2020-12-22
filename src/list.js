@@ -15,7 +15,7 @@ class Node {
   }
 }
 
-class List {
+export class List {
   /**
    * Constructor.
    *
@@ -297,11 +297,36 @@ class List {
   }
 
   /**
+   * Creates a shallow copy of the list, with optional parameters to create a subset of
+   * the original list.
+   *
+   * @param {Node} firstNode - copy starts with this node. If firstNode is undefined, the first value of the copy
+   * is list.first().
+   * @param {Node} lastNode - last value of copy is list.previousNode(lastNode).value. If lastNode is undefined, the last
+   * value of the copy is list.last()
+   * @returns {List} - a shallow copy of the list with the specified values
+   * @example
+   * const list = List.of('A', 'B', 'C', 'D', 'E')
+   * const cNode = list.find(c => c === 'C')
+   * console.log([...list.slice()]) // prints ['A', 'B', 'C', 'D', 'E']
+   * console.log([...list.slice(cNode)]) // prints ['C', 'D', 'E']
+   * console.log([...list.slice(list.firstNode(), cNode)]) // prints ['A', 'B']
+   * console.log([...list.slice(cNode, cNode)]) // prints []
+   */
+  slice (firstNode, lastNode) {
+    return List.from(this[Symbol.iterator](firstNode, lastNode))
+  }
+
+  /**
    * Generator that produces each node list in order from first to last. The value property of each node provides
    * the associated value.
    *
    * Unexpected results may happen if the list structure is modified during iteration.
    *
+   * @param {Node} first - iteration starts with this node. If first is undefined, the first node returned
+   * is list.firstNode().
+   * @param {Node} last - last node returned is list.previousNode(last). If last is undefined, the last
+   * node returned is list.lastNode()
    * @returns {Generator}
    * @example
    * const list = List.from([1, 2, 3, 4])
@@ -311,9 +336,10 @@ class List {
    * }
    * console.log(array) // prints [1, 2, 3, 4]
    */
-  * nodes () {
-    let current = this.head.next
-    while (current !== this.tail) {
+  * nodes (first, last) {
+    let current = first || this.head.next
+    const tail = last || this.tail
+    while (current !== tail) {
       yield current
       current = current.next
     }
@@ -338,6 +364,10 @@ class List {
    * Iterable protocol over the *values* in the list.
    *
    * @name Symbol.iterator
+   * @param {Node} firstNode - iteration starts with this node. If firstNode is undefined, the first value returned
+   * is list.first().
+   * @param {Node} lastNode - last value returned is list.previousNode(lastNode).value. If lastNode is undefined, the last
+   * value returned is list.last()
    * @returns {Generator}
    * @example
    * const list = List.from([1, 2, 3, 4])
@@ -347,15 +377,9 @@ class List {
    * }
    * console.log(array) // prints [1, 2, 3, 4]
    */
-  * [Symbol.iterator] () {
-    let current = this.head.next
-    while (current !== this.tail) {
-      yield current.value
-      current = current.next
+  * [Symbol.iterator] (firstNode, lastNode) {
+    for (const node of this.nodes(firstNode, lastNode)) {
+      yield node.value
     }
   }
-}
-
-export {
-  List
 }
