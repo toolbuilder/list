@@ -46,20 +46,6 @@ Small, mutable, double linked, iterable list.
 npm install --save @toolbuilder/list
 ```
 
-Access the latest UMD package from [unpkg](https://unpkg.com) like this:
-
-```html
-<script src="https://unpkg.com/@toolbuilder%2flist/umd/list.umd.min.js"></script>
-```
-
-Or for the full version:
-
-```html
-<script src="https://unpkg.com/@toolbuilder%2flist/umd/list.umd.js"></script>
-```
-
-Both packages create a global variable representing the list as `DoubleLinkedList`.
-
 ## Getting Started
 
 This is the import for require:
@@ -141,7 +127,7 @@ Constructor.
 
 #### Parameters
 
-- `iterable` [Iterable](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols#The_iterable_protocol) builds list using iterable (optional, default `null`)
+* `iterable` [Iterable](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols#The_iterable_protocol) builds list using iterable (optional, default `null`)
 
 #### Examples
 
@@ -210,7 +196,7 @@ Provides the node that comes before the provided node.
 
 #### Parameters
 
-- `node` [Node](#node) any Node element provided by the List instance
+* `node` [Node](#node) any Node element provided by the List instance
 
 #### Examples
 
@@ -229,7 +215,7 @@ Provides the node that comes after the provided node.
 
 #### Parameters
 
-- `node` [Node](#node) any Node element provided by the List instance
+* `node` [Node](#node) any Node element provided by the List instance
 
 #### Examples
 
@@ -248,8 +234,8 @@ Insert value after a node.
 
 #### Parameters
 
-- `prevNode` [Node](#node) node from this list to insert value behind
-- `value` **any** value to insert
+* `prevNode` [Node](#node) node from this list to insert value behind
+* `value` **any** value to insert
 
 #### Examples
 
@@ -268,8 +254,8 @@ Insert value before a node.
 
 #### Parameters
 
-- `nextNode` [Node](#node) node from this list to insert value in front of
-- `value` **any** value to insert
+* `nextNode` [Node](#node) node from this list to insert value in front of
+* `value` **any** value to insert
 
 #### Examples
 
@@ -288,7 +274,7 @@ Remove a node from the list.
 
 #### Parameters
 
-- `node` [Node](#node) the node to remove from the list. The node is no longer useable after this call,
+* `node` [Node](#node) the node to remove from the list. The node is no longer useable after this call,
   and no longer references the associated value.
 
 #### Examples
@@ -307,7 +293,7 @@ Add a value to the end of the list.
 
 #### Parameters
 
-- `value` **any** to be added to end of list
+* `value` **any** to be added to end of list
 
 #### Examples
 
@@ -341,8 +327,8 @@ Find the first value in the list where callback(value) returns truthy.
 
 #### Parameters
 
-- `callback` **[Function][2]** called for each value in the list until returns truthy
-- `thisArg` **[Object][3]** value to use as `this` when executing callback, defaults to null (optional, default `null`)
+* `callback` **[Function][2]** called for each value in the list until returns truthy
+* `thisArg` **[Object][3]** value to use as `this` when executing callback, defaults to null (optional, default `null`)
 
 #### Examples
 
@@ -377,7 +363,7 @@ Push a value onto the front of the list.
 
 #### Parameters
 
-- `value` **any** to be added to front of list
+* `value` **any** to be added to front of list
 
 #### Examples
 
@@ -397,9 +383,9 @@ the original list.
 
 #### Parameters
 
-- `firstNode` [Node](#node) copy starts with this node. If firstNode is undefined, the first value of the copy
+* `firstNode` [Node](#node) copy starts with this node. If firstNode is undefined, the first value of the copy
   is list.first().
-- `lastNode` [Node](#node) last value of copy is list.previousNode(lastNode).value. If lastNode is undefined, the last
+* `lastNode` [Node](#node) last value of copy is list.previousNode(lastNode).value. If lastNode is undefined, the last
   value of the copy is list.last()
 
 #### Examples
@@ -424,9 +410,9 @@ Unexpected results may happen if the list structure is modified during iteration
 
 #### Parameters
 
-- `first` [Node](#node) iteration starts with this node. If first is undefined, the first node returned
+* `first` [Node](#node) iteration starts with this node. If first is undefined, the first node returned
   is list.firstNode().
-- `last` [Node](#node) last node returned is list.previousNode(last). If last is undefined, the last
+* `last` [Node](#node) last node returned is list.previousNode(last). If last is undefined, the last
   node returned is list.lastNode()
 
 #### Examples
@@ -456,7 +442,7 @@ Static constructor.
 
 #### Parameters
 
-- `iterable` [Iterable](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols#The_iterable_protocol) build list from iterable, may be null (optional, default `null`)
+* `iterable` [Iterable](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols#The_iterable_protocol) build list from iterable, may be null (optional, default `null`)
 
 #### Examples
 
@@ -473,7 +459,7 @@ Static constructor from parameter values.
 
 #### Parameters
 
-- `values` **...any** each value becomes an element of the list in the order provided
+* `values` **...any** each value becomes an element of the list in the order provided
 
 #### Examples
 
@@ -486,13 +472,13 @@ Returns **List**
 
 ### Symbol.iterator
 
-Iterable protocol over the _values_ in the list.
+Iterable protocol over the *values* in the list.
 
 #### Parameters
 
-- `firstNode` [Node](#node) iteration starts with this node. If firstNode is undefined, the first value returned
+* `firstNode` [Node](#node) iteration starts with this node. If firstNode is undefined, the first value returned
   is list.first().
-- `lastNode` [Node](#node) last value returned is list.previousNode(lastNode).value. If lastNode is undefined, the last
+* `lastNode` [Node](#node) last value returned is list.previousNode(lastNode).value. If lastNode is undefined, the last
   value returned is list.last()
 
 #### Examples

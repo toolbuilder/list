@@ -18,30 +18,30 @@
   },
   "license": "MIT",
   "author": "Kevin Hudson",
-  "main": "index.js",
-  "unpkg": "umd/list.umd.min.js",
+  "type": "module",
+  "exports": {
+    "import": "./src/list.js",
+    "require": "./cjs/list.js"
+  },
+  "main": "cjs/list.js",
   "module": "src/list.js",
   "files": [
-    "src/list.js",
-    "index.js",
-    "umd"
+    "cjs",
+    "src"
   ],
   "scripts": {
-    "build": "run-s bundle build:docs",
-    "build:docs": "node -r esm ./scripts/docgen.js",
-    "bundle": "run-s bundle:clean bundle:rollup",
-    "bundle:clean": "rimraf ./umd",
-    "bundle:rollup": "rollup -c rollup.config.js",
-    "precheck": "run-s build",
-    "check": "run-s check:*",
+    "build": "run-s build:cjs build:docs",
+    "build:cjs": "rollup -c rollup.config.cjs.js",
+    "build:docs": "node ./scripts/docgen.js",
+    "check": "run-s build check:*",
     "check:packagejson": "npmPkgJsonLint .",
-    "check:packfile": "rollup --config node:@toolbuilder/rollup-config-pkgtest",
+    "check:packfile": "rollup -c rollup.config.test.js",
     "check:src": "eslint src test",
     "check:test": "run-s test",
     "check:uncommitted": "uncommitted",
     "prerelease": "run-s check",
     "release": "standard-version",
-    "test": "tape -r esm \"test/*test.js\""
+    "test": "esm-tape-runner \"test/**/*test.js\""
   },
   "eslintConfig": {
     "extends": "@toolbuilder/eslint-config"
@@ -50,22 +50,25 @@
     "esm": "^3.2.25"
   },
   "devDependencies": {
+    "@rollup/plugin-node-resolve": "^13.0.2",
+    "@small-tech/esm-tape-runner": "^1.0.3",
     "@toolbuilder/eslint-config": "^0.1.4",
     "@toolbuilder/package-json-lint-config": "^0.1.0",
     "@toolbuilder/rollup-config-pkgtest": "^0.1.2",
-    "documentation": "^13.1.0",
-    "eslint": "^7.16.0",
-    "markedpp": "^1.0.2",
+    "@toolbuilder/rollup-plugin-test-tools": "^0.1.0",
+    "documentation": "^13.2.5",
+    "eslint": "^7.31.0",
+    "markedpp": "^1.0.3",
     "npm-package-json-lint": "^5.1.0",
     "npm-run-all": "^4.1.5",
     "rimraf": "^3.0.2",
-    "rollup": "^2.35.1",
+    "rollup": "^2.53.3",
     "rollup-plugin-terser": "^7.0.2",
-    "standard-version": "^9.0.0",
+    "standard-version": "^9.3.1",
     "tap-nirvana": "^1.1.0",
-    "tape": "^5.0.1",
+    "tape": "^5.2.2",
     "uncommitted": "^1.0.0",
-    "zora": "^4.0.1"
+    "zora": "^4.1.0"
   },
   "npmpackagejsonlint": {
     "extends": "@toolbuilder/package-json-lint-config"
