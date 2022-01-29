@@ -41,32 +41,26 @@
     "check:uncommitted": "uncommitted",
     "prerelease": "run-s check",
     "release": "standard-version",
-    "test": "esm-tape-runner \"test/**/*test.js\""
+    "test": "pta --reporter tap \"test/**/*test.js\""
   },
   "eslintConfig": {
     "extends": "@toolbuilder/eslint-config"
   },
-  "dependencies": {},
   "devDependencies": {
-    "@rollup/plugin-node-resolve": "^13.0.2",
-    "@small-tech/esm-tape-runner": "^1.0.3",
     "@toolbuilder/eslint-config": "^0.1.4",
     "@toolbuilder/package-json-lint-config": "^0.1.0",
-    "@toolbuilder/rollup-config-pkgtest": "^0.1.2",
-    "@toolbuilder/rollup-plugin-test-tools": "^0.1.0",
+    "@toolbuilder/rollup-plugin-test-tools": "^1.0.0",
     "documentation": "^13.2.5",
     "eslint": "^7.31.0",
     "markedpp": "^1.0.3",
     "npm-package-json-lint": "^5.1.0",
     "npm-run-all": "^4.1.5",
+    "pta": "^1.0.2",
     "rimraf": "^3.0.2",
     "rollup": "^2.53.3",
-    "rollup-plugin-terser": "^7.0.2",
     "standard-version": "^9.3.1",
-    "tap-nirvana": "^1.1.0",
-    "tape": "^5.2.2",
     "uncommitted": "^1.0.0",
-    "zora": "^4.1.0"
+    "zora": "^5.0.2"
   },
   "npmpackagejsonlint": {
     "extends": "@toolbuilder/package-json-lint-config"
