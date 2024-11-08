@@ -20,8 +20,9 @@
   "author": "Kevin Hudson",
   "type": "module",
   "exports": {
-    "import": "./src/list.js",
-    "require": "./cjs/list.js"
+    "require": "./cjs/list.js",
+    "types": "./src/list.d.ts",
+    "default": "./src/list.js"
   },
   "main": "cjs/list.js",
   "module": "src/list.js",
