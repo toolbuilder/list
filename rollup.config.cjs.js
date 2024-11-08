@@ -1,3 +1,4 @@
+import { isAbsolute } from 'node:path'
 /**
  * Builds the CommonJS code used to support CommonJS users. Since the package is stateless,
  * the CommonJS code can be completely separate without creating a dual package hazard.
@@ -6,12 +7,11 @@
 export default [
   {
     input: 'src/list.js',
-    preserveModules: true,
+    external: (id) => !(id.startsWith('.') || isAbsolute(id)),
     output: {
       dir: 'cjs',
-      format: 'cjs'
-    },
-    plugins: [
-    ]
+      format: 'cjs',
+      preserveModules: true
+    }
   }
 ]
